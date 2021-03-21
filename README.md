@@ -17,9 +17,13 @@ Steps followed:
 ### Files Description
 
 > create_tables.py - This file creates new database SparkifyDB and creates all the tables.
+
 > sql_queries.py - This file contains all the SQL statements used to create tables and insert data into all the tables.
+
 > etl.py - This file extracts the data from input files and load it into all the tables.
+
 > etl.ipynb - This notebook is used to test code in etl.py file.
+
 > test.ipynb - This notebook is used to test sql queries to verify the data loaded in the tables.
 
 ### Steps to be performed
@@ -34,14 +38,14 @@ Steps followed:
 ### Example queries and Results
 
 ##### SELECT * FROM songplays LIMIT 1;
-'''
+```
 songplay_id	start_time	user_id	level	song_id	artist_id	session_id	location	user_agent
 0	2018-11-30 00:22:07.796000	91	free	None	None	829	Dallas-Fort Worth-Arlington, TX	Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; WOW64; Trident/6.0)
-'''
+```
 
 ##### SELECT * FROM songplays where song_id is not null limit 5;
 
-'''
+```
 songplay_id	start_time	user_id	level	song_id	artist_id	session_id	location	user_agent
 4677	2018-11-21 21:56:47.796000	15	paid	SOZCTXZ12AB0182364	AR5KOSW1187FB35FF4	818	Chicago-Naperville-Elgin, IL-IN-WI	"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/36.0.1985.125 Chrome/36.0.1985.125 Safari/537.36"
-'''
+```
