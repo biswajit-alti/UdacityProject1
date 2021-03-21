@@ -6,6 +6,11 @@ from sql_queries import *
 
 
 def process_song_file(cur, filepath):
+    """
+    - Loads the song file
+    - Extracts the appropriate columns from the file
+    - Inserts records into song table and artists table
+    """
     # open song file
     df = pd.read_json(filepath,lines=True)
 
@@ -20,6 +25,13 @@ def process_song_file(cur, filepath):
     cur.execute(artist_table_insert, artist_data)
 
 def process_log_file(cur, filepath):
+    """
+    - Loads the log file 
+    - Handles transformation, datatype of various columns
+    - Inserts data into users and time table
+    - Gets song_id and artist_id using log file information
+    - Inserts record into songplays table by using log file and song file information
+    """
     # open log file
     df = pd.read_json(filepath,lines=True)
 
@@ -51,8 +63,6 @@ def process_log_file(cur, filepath):
     df['userId'] = df.userId.astype('int')
     user_df = df[['userId', 'firstName', 'lastName', 'gender', 'level']]
     user_df = user_df.drop_duplicates(subset='userId', keep="first")
-#     user_df = user_df[user_df.userId.apply(lambda x: str(x).isdigit())]
-#     user_df['userId'] = user_df.userId.astype('int')
 
     # insert user records
     for i, row in user_df.iterrows():
@@ -76,6 +86,9 @@ def process_log_file(cur, filepath):
 
 
 def process_data(cur, conn, filepath, func):
+    """
+    Processes the data for all the files in the directory
+    """
     # get all files matching extension from directory
     all_files = []
     for root, dirs, files in os.walk(filepath):
@@ -95,6 +108,10 @@ def process_data(cur, conn, filepath, func):
 
 
 def main():
+    """
+    - Connect to Sparkifydb 
+    - Call process_data function to process all the input files
+    """
     conn = psycopg2.connect("host=127.0.0.1 dbname=sparkifydb user=student password=student")
     cur = conn.cursor()
 
